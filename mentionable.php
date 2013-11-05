@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Mentionable
  * Plugin URI: http://x-team.com
- * Description:
- * Version: 0.1.0
- * Author: X-Team, Jonathan Bardo
+ * Description: Mention WordPress content with inline autocomplete inside tinyMCE.
+ * Version: 0.2.0
+ * Author: X-Team, Jonathan Bardo, Topher
  * Author URI: http://x-team.com/wordpress/
  * License: GPLv2+
  * Text Domain: mentionable
@@ -42,10 +42,34 @@ class Mentionable {
 	/**
 	 * Autocomplete component class
 	 *
-	 * @var object
+	 * @var Mentionable_Autocomplete
 	 * @access public
 	 */
 	public $autocomplete;
+
+	/**
+	 * Content component class
+	 *
+	 * @var Mentionable_Content
+	 * @access public
+	 */
+	public $content;
+
+	/**
+	 * Post metas component class
+	 *
+	 * @var Mentionable_Postmetas
+	 * @access public
+	 */
+	public $postmetas;
+
+	/**
+	 * Settings instance
+	 *
+	 * @var Mentionable_Settings
+	 * @access public
+	 */
+	public $settings;
 
 	/**
 	 * Current admin post_type
@@ -54,17 +78,6 @@ class Mentionable {
 	 * @access public
 	 */
 	public static $current_post_type;
-
-	/**
-	 * Plugins options
-	 *
-	 * @var array
-	 * @access private
-	 */
-	private static $options = array(
-		'post_types' => array( 'post' ),
-		'autocomplete_post_types' => array( 'post' ),
-	);
 
 	/**
 	 * Constructor | Add required hooks
@@ -80,27 +93,14 @@ class Mentionable {
 		// Get current post type in admin
 		self::$current_post_type = $this->get_current_admin_post_type();
 
-		// Let the theme override some options
-		self::$options = apply_filters( 'mentionable_options', self::$options );
-
 		// Set constans needed by the plugin.
 		add_action( 'plugins_loaded', array( $this, 'define_constants' ), 1 );
 
 		// Internationalize the text strings used.
 		add_action( 'plugins_loaded', array( $this, 'i18n' ), 2 );
 
-		// Register tmce plugin -- because pluggable.php is loaded after plugin
-		add_action( 'admin_init', array( $this, 'admin_init' ) );
-
-		// Enqueue admin script
-		if ( in_array( self::$current_post_type, self::$options['post_types'] ) ) {
-			// Filter tinymce css to add custom
-			add_filter( 'mce_css', array( $this, 'filter_mce_css' ) );
-
-			// Enqueue admin script
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-		}
-
+		// Setup all dependent class
+		add_action( 'after_setup_theme', array( $this, 'setup' ), 3 );
 	}
 
 	/**
@@ -131,9 +131,40 @@ class Mentionable {
 	 */
 	public function i18n() {
 		// Load the translation of the plugin
-		load_plugin_textdomain( 'mentionable', false, 'mentionable/languages' );
+		load_plugin_textdomain( 'mentionable', false,  dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
+	/**
+	 * Setup all classes needed for the plugin
+	 *
+	 * @access public
+	 * @action plugins_loaded
+	 * @return void
+	 */
+	public function setup() {
+		// Register settings
+		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-settings.php' );
+		$this->settings = new Mentionable_Settings;
+
+		// Register tmce plugin -- because pluggable.php is loaded after plugin
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+
+		if ( in_array( self::$current_post_type, Mentionable_Settings::$options['post_types'] ) ) {
+			// Filter tinymce css to add custom
+			add_filter( 'mce_css', array( $this, 'filter_mce_css' ) );
+
+			// Enqueue admin script
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+		}
+
+		// Intanciate postmetas class
+		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-postmetas.php' );
+		$this->postmetas = new Mentionable_Postmetas;
+
+		// Instanciate content class
+		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-content.php' );
+		$this->content = new Mentionable_Content;
+	}
 
 	/**
 	 * Add the required action and filter after init hook
@@ -147,7 +178,7 @@ class Mentionable {
 		if (
 			'true' === get_user_option( 'rich_editing' ) 
 			&& 
-			in_array( self::$current_post_type, self::$options['post_types'] ) 
+			in_array( self::$current_post_type, Mentionable_Settings::$options['post_types'] ) 
 		) {
 			add_filter( 'mce_external_plugins',  array( $this, 'register_tmce_plugin' ) );
 		}
@@ -155,7 +186,6 @@ class Mentionable {
 		// Add ajax handler for autocomplete action
 		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-autocomplete.php' );
 		$this->autocomplete = new Mentionable_Autocomplete();
-		add_action( 'wp_ajax_get_mentionable', array( $this->autocomplete, 'handle_ajax' ) );
 	}
 
 	/**
@@ -228,22 +258,6 @@ class Mentionable {
 		}
 
 		return isset( $current_post_type ) ? $current_post_type : null;
-	}
-
-
-	/**
-	 * $options getter
-	 *
-	 * @param string $name
-	 *
-	 * @return mixed
-	 */
-	public static function get_option( $name ) {
-		if ( isset( self::$options[$name] ) ) {
-			return self::$options[$name];
-		}
-
-		return null;
 	}
 
 }
