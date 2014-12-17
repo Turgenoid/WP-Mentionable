@@ -4,7 +4,7 @@
 ![Banner](assets/banner-1544x500.png)
 Mention WordPress content with inline autocomplete inside tinyMCE.
 
-**Contributors:** [x-team](http://profiles.wordpress.org/x-team), [jonathanbardo](http://profiles.wordpress.org/jonathanbardo), [topher1kenobe](http://profiles.wordpress.org/topher1kenobe), [shadyvb](http://profiles.wordpress.org/shadyvb), [westonruter](http://profiles.wordpress.org/westonruter)  
+**Contributors:** [jonathanbardo](http://profiles.wordpress.org/jonathanbardo), [topher1kenobe](http://profiles.wordpress.org/topher1kenobe), [shadyvb](http://profiles.wordpress.org/shadyvb), [westonruter](http://profiles.wordpress.org/westonruter), [x-team](http://profiles.wordpress.org/x-team)  
 **Tags:** [tinyMCE](http://wordpress.org/plugins/tags/tinyMCE), [admin](http://wordpress.org/plugins/tags/admin), [mention](http://wordpress.org/plugins/tags/mention)  
 **Requires at least:** 4.1  
 **Tested up to:** 4.1  
