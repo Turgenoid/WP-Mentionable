@@ -11,7 +11,7 @@ Mention WordPress content with inline autocomplete inside tinyMCE.
 
 == Description ==
 
-This plugin brings the power of @mention inside tinyMCE. You can choose where the autocompletion gets his information from and on which custom post type this plugin is activated on. You can also create custom template replacement on the front-end based on your need.
+This plugin brings the power of @mention inside tinyMCE. You can choose where the autocompletion gets his information from and on which custom post type this plugin is activated on. You can also create custom template replacement on the front-end based on your needs.
 
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-mentionable). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-mentionable/issues) reported there before going to the plugin forum.**
 
