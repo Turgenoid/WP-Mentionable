@@ -6,8 +6,8 @@ Mention WordPress content with inline autocomplete inside tinyMCE.
 
 **Contributors:** [x-team](http://profiles.wordpress.org/x-team), [jonathanbardo](http://profiles.wordpress.org/jonathanbardo), [topher1kenobe](http://profiles.wordpress.org/topher1kenobe), [shadyvb](http://profiles.wordpress.org/shadyvb), [westonruter](http://profiles.wordpress.org/westonruter)  
 **Tags:** [tinyMCE](http://wordpress.org/plugins/tags/tinyMCE), [admin](http://wordpress.org/plugins/tags/admin), [mention](http://wordpress.org/plugins/tags/mention)  
-**Requires at least:** 3.6  
-**Tested up to:** 3.7.1  
+**Requires at least:** 4.1  
+**Tested up to:** 4.1  
 **Stable tag:** trunk (master)  
 **License:** [GPLv2 or later](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -17,7 +17,7 @@ This plugin brings the power of @mention inside tinyMCE. You can choose where th
 
 **Development of this plugin is done [on GitHub](https://github.com/x-team/wp-mentionable). Pull requests welcome. Please see [issues](https://github.com/x-team/wp-mentionable/issues) reported there before going to the plugin forum.**
 
-[![Build Status](https://travis-ci.org/x-team/wp-mentionable.png)](https://travis-ci.org/x-team/wp-mentionable?branch=master)
+[![Build Status](https://travis-ci.org/jonathanbardo/WP-Mentionable.png?branch=master)](https://travis-ci.org/jonathanbardo/WP-Mentionable)
 
 ## Installation ##
 
@@ -36,6 +36,9 @@ This plugin brings the power of @mention inside tinyMCE. You can choose where th
 ![After pressing enter, the plugin replace your input with the right link and content](assets/screenshot-2.png)
 
 ## Changelog ##
+
+### 0.3.0 ###
+* Update for 4.1 Compatibility
 
 ### 0.2.1 ###
 * Update for 3.9 Compatibility

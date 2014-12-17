@@ -43,13 +43,13 @@
 			 *
 			 * @return {void}
 			 */
-			function keyUpEvent( ed, e ) {
+			function keyUpEvent( e ) {
 				if (
 						! params.visible &&
 								$.inArray( e.keyCode, [ ENTER_KEY, ESC_KEY ] ) === -1 ||
 								$.inArray( e.keyCode, [ DOWN_ARROW_KEY, UP_ARROW_KEY, ENTER_KEY, ESC_KEY ] ) === -1
 						) {
-					var currentWord = getCurrentWord( ed );
+					var currentWord = getCurrentWord( this );
 					var matches = matchingOptions( currentWord );
 					if ( currentWord.length > 0 ) {
 						populateList( currentWord );
@@ -68,7 +68,7 @@
 			 *
 			 * @return {mixed|boolean}
 			 */
-			function keyDownEvent( ed, e ) {
+			function keyDownEvent( e ) {
 				if ( params.visible ) {
 					switch( e.keyCode ) {
 					case DOWN_ARROW_KEY:
@@ -78,7 +78,7 @@
 						highlightPreviousOption();
 						return tinymce.dom.Event.cancel(e);
 					case ENTER_KEY:
-						selectOption( ed, getCurrentWord(ed) );
+						selectOption(this, getCurrentWord(this));
 						params.cancelEnter = true;
 						// the enter event needs to be cancelled on keypress so
 						// it doesn't register a carriage return
@@ -99,7 +99,7 @@
 			 *
 			 * @return {void|object} - tinycemce cancel event
 			 */
-			function keyPressEvent( ed, e ) {
+			function keyPressEvent( e ) {
 				if ( e.keyCode === ENTER_KEY && params.cancelEnter ) {
 					params.cancelEnter = false;
 					params.ajax_list = [];
@@ -375,10 +375,10 @@
 			}
 
 			// Add event listener here
-			ed.onKeyUp.addToTop( keyUpEvent );
-			ed.onKeyDown.addToTop( keyDownEvent );
-			ed.onKeyPress.addToTop( keyPressEvent );
-			ed.onClick.add( hideOptionList );
+			ed.on('keyup', keyUpEvent);
+			ed.on('keydown', keyDownEvent);
+			ed.on('keypress', keyPressEvent);
+			ed.on('click', hideOptionList);
 		}
 
 	});

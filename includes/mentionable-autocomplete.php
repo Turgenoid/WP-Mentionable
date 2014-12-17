@@ -70,7 +70,7 @@ class Mentionable_Autocomplete {
 		global $wpdb;
 
 		if ( $post_title_like = $wp_query->get( 'post_title_like' ) ) {
-			$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( like_escape( $post_title_like ) ) . '%\'';
+			$where .= ' AND ' . $wpdb->posts . '.post_title LIKE \'%' . esc_sql( $wpdb->esc_like( $post_title_like ) ) . '%\'';
 		}
 
 		return $where;

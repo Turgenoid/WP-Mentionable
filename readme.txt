@@ -1,8 +1,8 @@
 === Mentionable ===
 Contributors:      X-team, jonathanbardo, topher1kenobe, shadyvb, westonruter
 Tags:              tinyMCE, admin, mention
-Requires at least: 3.6
-Tested up to:      3.7.1
+Requires at least: 4.1
+Tested up to:      4.1
 Stable tag:        trunk
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,6 +28,9 @@ This plugin brings the power of @mention inside tinyMCE. You can choose where th
 2. After pressing enter, the plugin replace your input with the right link and content
 
 == Changelog ==
+
+= 0.3.0 =
+* Update for 4.1 Compatibility
 
 = 0.2.1 =
 * Update for 3.9 Compatibility

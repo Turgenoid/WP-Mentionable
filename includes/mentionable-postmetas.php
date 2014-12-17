@@ -39,10 +39,9 @@ class Mentionable_Postmetas {
 	 */
 	public function update_mention_meta( $post_id, $post, $update ) {
 
-		if ( wp_is_post_revision( $post_id ) || ! $update )
-			return
-
-		$post = get_post( $post_id );
+		if ( wp_is_post_revision( $post_id ) || ! $update ) {
+			return;
+		}
 
 		// Go get the post ids mentioned in this post
 		$mentioned_ids = $this->get_mentioned_ids( $post->post_content );
@@ -54,11 +53,9 @@ class Mentionable_Postmetas {
 
 			$stack = get_post_meta( $mention, 'mentioned_by' );
 
-			if ( $post->ID != $mention)
-				$stack[0][$post_id] = $mention_data;
-
-			update_post_meta( $mention, 'mentioned_by', $stack[0] );
-
+			if ( $post_id != $mention ) {
+				update_post_meta( $mention, 'mentioned_by', $post_id );
+			}
 		}
 
 	}
@@ -89,17 +86,9 @@ class Mentionable_Postmetas {
 		$difference_ids = array_diff_key( $old_mentioned_ids, $new_mentioned_ids );
 
 		// loop through the deleted IDs and unset them
-		foreach ( $difference_ids as $post_id => $value ) {
-
-			$stack = get_post_meta( $post_id, 'mentioned_by' );
-
-			unset($stack[0][$old_version->ID]);
-
+		foreach ( $difference_ids as $loop_post_id => $value ) {
+			delete_post_meta( $loop_post_id, 'mentioned_by', $post_id );
 		}
-
-		// update the post meta to remove IDs
-		update_post_meta( $post_id, 'mentioned_by', $stack[0] );
-
 	}
 
 
