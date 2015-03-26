@@ -3,7 +3,7 @@
  * Plugin Name: Mentionable
  * Plugin URI: http://x-team.com
  * Description: Mention WordPress content with inline autocomplete inside tinyMCE.
- * Version: 0.3.0
+ * Version: 0.4.0
  * Author: Jonathan Bardo, Topher, X-Team
  * Author URI: http://x-team.com/wordpress/
  * License: GPLv2+
@@ -93,7 +93,7 @@ class Mentionable {
 		// Get current post type in admin
 		self::$current_post_type = $this->get_current_admin_post_type();
 
-		// Set constans needed by the plugin.
+		// Set constant needed by the plugin.
 		add_action( 'plugins_loaded', array( $this, 'define_constants' ), 1 );
 
 		// Internationalize the text strings used.
@@ -111,6 +111,8 @@ class Mentionable {
 	 * @return void
 	 */
 	public function define_constants() {
+		define( 'MENTIONABLE_BASENAME', plugin_basename( __FILE__ ) );
+
 		// Set constant path to the plugin directory.
 		define( 'MENTIONABLE_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 
@@ -157,11 +159,11 @@ class Mentionable {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 		}
 
-		// Intanciate postmetas class
+		// Instantiate postmetas class
 		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-postmetas.php' );
 		$this->postmetas = new Mentionable_Postmetas;
 
-		// Instanciate content class
+		// Instantiate content class
 		require_once( MENTIONABLE_INCLUDES_DIR . '/' . self::$class_name . '-content.php' );
 		$this->content = new Mentionable_Content;
 	}
@@ -209,13 +211,14 @@ class Mentionable {
 	 * @return void
 	 */
 	public function admin_enqueue_scripts() {
-		wp_enqueue_style( 'mentionable_css', MENTIONABLE_URL . '/css/' . self::$class_name . '-style.css', '0.1.0' );
+		wp_enqueue_style( 'mentionable_css', MENTIONABLE_URL . '/css/' . self::$class_name . '-style.css', '0.4.0' );
 		wp_localize_script(
 			'jquery',
 			self::$class_name,
 			array(
-				'nonce'  => wp_create_nonce( self::$class_name . '_nonce' ),
-				'action' => 'get_mentionable',
+				'nonce'   => wp_create_nonce( self::$class_name . '_nonce' ),
+				'action'  => 'get_mentionable',
+				'new_tab' => Mentionable_Settings::$options['open_new_tab'] ? true : false,
 			)
 		);
 	}

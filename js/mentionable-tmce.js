@@ -290,7 +290,7 @@
 			}
 
 			/**
-			 * Highlight next posssible option in the autocomplete list
+			 * Highlight next possible option in the autocomplete list
 			 *
 			 * @return {void}
 			 */
@@ -305,7 +305,7 @@
 			}
 
 			/**
-			 * Highlight previous posssible option in the autocomplete list
+			 * Highlight previous possible option in the autocomplete list
 			 *
 			 * @return {void}
 			 */
@@ -359,11 +359,14 @@
 				range.setStart( range.startContainer, range.startOffset - matchedText.length - 1 );
 				ed.selection.setRng( range );
 
+                var new_tab = mentionable.new_tab ? '_blank' : '_self';
 				ed.selection.setContent(
 						'<a class="' +
 								params.nodeClass +
 								'" href="' +
 								currentURL +
+                                '" target="' +
+                                new_tab +
 								'" data-mentionable="' +
 								currentID +
 								'">' +

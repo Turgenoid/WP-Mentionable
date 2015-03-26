@@ -51,8 +51,6 @@ class Mentionable_Postmetas {
 
 		foreach ( $mentioned_ids as $mention => $mention_data ) {
 
-			$stack = get_post_meta( $mention, 'mentioned_by' );
-
 			if ( $post_id != $mention ) {
 				update_post_meta( $mention, 'mentioned_by', $post_id );
 			}
@@ -61,7 +59,7 @@ class Mentionable_Postmetas {
 	}
 
 	/**
-	 * Removes ids from post meta on posts UNmentioned
+	 * Removes ids from post meta on posts UN mentioned
 	 *
 	 * @since 0.1.0
 	 * @access public
@@ -76,7 +74,7 @@ class Mentionable_Postmetas {
 		// get the version of the post from before this update
 		$old_version = get_post( $post_id );
 
-		// get the menttioned IDs from before the latest update
+		// get the mentioned IDs from before the latest update
 		$old_mentioned_ids = $this->get_mentioned_ids( $old_version->post_content );
 
 		// get the mentioned IDs from the latest update

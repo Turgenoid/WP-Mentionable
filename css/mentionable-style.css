@@ -22,9 +22,13 @@ ul.mentionable-autocomplete{
 	z-index: 1000000;
 }
 
+ul.mentionable-autocomplete mark {
+    background-color: #FFFBCC;
+}
+
 ul.mentionable-autocomplete > li:hover,
 ul.mentionable-autocomplete > li[data-selected=true]{
-	background: #3875d7;
+	background: #0074A2;
 	color: #fff;
 }
 

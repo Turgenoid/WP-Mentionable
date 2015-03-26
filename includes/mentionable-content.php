@@ -34,8 +34,9 @@ class Mentionable_Content {
 	 * @return string $content
 	 */
 	public function the_content( $content ){
-		if ( 'on' === Mentionable_Settings::$options['load_template'] && apply_filters( 'mentionable_load_template', '__return_true' ) )
+		if ( 'on' === Mentionable_Settings::$options['load_template'] && apply_filters( 'mentionable_load_template', '__return_true' ) ) {
 			$content = preg_replace_callback( '#<a\b[^>]*?\sdata-mentionable="([^"]*?)"[^>]*?>([^<]*?)</a>#', array( $this, 'handle_replacement' ), $content );
+		}
 
 		return $content;
 	}

@@ -18,7 +18,7 @@ class Mentionable_Autocomplete {
 	}
 
 	/**
-	 * Handle the aucomplete ajax request
+	 * Handle the autocomplete ajax request
 	 *
 	 * @return json
 	 */
