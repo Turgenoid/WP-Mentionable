@@ -39,6 +39,9 @@ A review of the plugin is available on [WP Tavern](http://wptavern.com/mentionab
 
 ## Changelog ##
 
+### 0.4.1 ###
+* Restore PHP 5.3 compatibility
+
 ### 0.4.0 ###
 * Add option to open link in a new tab
 * Change Styling to be closer with WP UI

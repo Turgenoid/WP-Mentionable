@@ -31,7 +31,7 @@ class Mentionable_Settings {
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
 
 		// Add settings link
-		add_filter( 'plugin_action_links_' . MENTIONABLE_BASENAME, [ $this, 'action_link' ], 10, 4 );
+		add_filter( 'plugin_action_links_' . MENTIONABLE_BASENAME, array( $this, 'action_link' ), 10, 4 );
 
 		$defaults = array(
 			'post_types'              => array( 'post' ),
