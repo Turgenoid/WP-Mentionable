@@ -39,7 +39,7 @@ class Mentionable_Autocomplete {
 			'posts_per_page'  => 5,
 		);
 
-		$query = new WP_Query( $query_args );
+		$query = new WP_Query( apply_filters( 'mentionable/autocomplete/args', $query_args ) );
 
 		$results = array();
 		foreach ( $query->posts as $id ) {

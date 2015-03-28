@@ -30,6 +30,9 @@ A review of the plugin is available on [WP Tavern](http://wptavern.com/mentionab
 2. After pressing enter, the plugin replace your input with the right link and content
 
 == Changelog ==
+= 0.4.2 =
+* Add new filter for WP_Query autocomplete
+
 = 0.4.1 =
 * Restore PHP 5.3 compatibility
 
