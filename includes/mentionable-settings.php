@@ -72,10 +72,10 @@ class Mentionable_Settings {
 	 * @return void
 	 */
 	public function settings_page() {
+		$tag = version_compare( $GLOBALS['wp_version'], '4.3', '>=' ) ? 'h1' : 'h2';
 		?>
 		<div class="wrap">
-			<?php screen_icon( 'tools' ); ?>
-			<h2><?php _e( 'Mentionable Options', 'mentionable' ) ?></h2>
+			<?php printf( '<%1$s>%2$s</%1$s>', $tag, esc_html__( 'Mentionable Options', 'mentionable' ) ); ?>
 
 			<form method="post" action="options.php">
 				<?php

@@ -39,6 +39,9 @@ A review of the plugin is available on [WP Tavern](http://wptavern.com/mentionab
 
 ## Changelog ##
 
+### 0.4.3 ###
+* Add WordPress 4.3 compatibility
+
 ### 0.4.2 ###
 * Add new filter for WP_Query autocomplete
 

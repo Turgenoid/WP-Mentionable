@@ -3,7 +3,7 @@
  * Plugin Name: Mentionable
  * Plugin URI: http://x-team.com
  * Description: Mention WordPress content with inline autocomplete inside tinyMCE.
- * Version: 0.4.2
+ * Version: 0.4.3
  * Author: Jonathan Bardo, Topher, X-Team
  * Author URI: http://x-team.com/wordpress/
  * License: GPLv2+
